@@ -1,0 +1,6 @@
+
+find_package(PythonInterp) # The building process use python to provide lazy-testing
+if (NOT PythonInterp_FOUND)
+	message(WARNING "Python is not found, lazy testing wont be active")
+endif()
+
