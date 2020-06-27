@@ -1,17 +1,14 @@
 # Eprofiler 0.0
-Easely exstensible bloc profiler.
+Block profiler.
 
 # Function and motivation
 
-Eprofiler is a tool designed to easely and precisaly time events duration (bloc of code duration)rather than a function of a line. This is also done to work across many process. It's had been done in C for my needs, but you can easely create modules for your prefered languages that mimic the C lib (~50 lines)
+Eprofiler is a tool designed to easely and precisaly time events duration (bloc of code duration)rather than a function of a line. This is also done to work across many process. It's composed a small C library  providing a really basic interface that product primitives outputs. This outputs are processed by eprof executable to produce kvhf files(https://github.com/crazyhouse33/kvhf). This design allow for the lib code to be the most simple, precise and efficient as possible. This allow to code the same 4/5 functions interfaces in your language if you ever need it. Then you can reuse eprof executable and even the generic library tests suits to see how your implementation compete in term of precision and overhead.
+
 
 # Install
 
 ```bash
-git clone https://github.com/crazyhouse33/authbreak
-cd authbreak/build
-cmake ..
-make authbreak
 ```
 
 The binary ends up in the bin directory.

@@ -7,18 +7,25 @@ def read_file_until(f, delim='\n', bufsize=65536):
         split = buf.split(delim)
         if len(split)>1:
             yield prev + split[0]# appending first the the tail
-            for part in split[1:-1]:# Threat everything in betwen between
+            for part in split[1:-1]:# Threat everything in  between
                 yield part
         prev += split[-1]#adding rest 
 
 
 class Event_parser:
 
-    def __init__(self, ):
+    def __init__(self, path=None):
         self.dictionnary_events=defaultdict(Event_entry)
         self.time_end_sep='\n'
         self.event_sep=','
         self.time_begin_sep=':'
+        if path==None:
+            return
+        elif isinstance (path, str):
+            self.parse_dir(path)
+        else:
+            raise TypeError("Init argument must be nothing, None, or a path to an eprof directory (str), not "+ str(type(path)))
+
 
 
     def parse_dir(self,dir_path):
@@ -43,11 +50,12 @@ class Event_parser:
 
     def parse_line(self, line):
         partition= line.partition(self.time_begin_sep)
-        return partition[0].split(self.event_sep) partition[2]
+        return partition[0].split(self.event_sep), partition[2]
 
-    def parser_get_result(self):
-        super_dict=Super_dict()
+    def to_kvhf_file(self):
+        kvhf_dic={}
         for key, value in self.dictionnary_events.items():
-            small_dict = Super_dict(value.event.as_dict(key))
-            super_dict.merge_vertical(small_dict)
-        return super_dict
+            event= value.event
+            kvhf_entry= event.to_kvhf()
+            kvhf_dic[key]= kvhf_entry
+        return KVH_file(kvhf_dic)
