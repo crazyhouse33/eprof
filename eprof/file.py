@@ -2,8 +2,6 @@ from collections import defaultdict
 from eprof.file_event_entry import Event_entry
 from kvhf.file import KVH_file
 
-i=-1
-stop=5956
 
 def read_file_until(f, delim='\n', bufsize=65536):
     prev = ''
@@ -46,8 +44,6 @@ class Event_file:
 
                 #we interlude start and end to minimize memory footprint
                 while not start_done or not end_done:
-                    i+=1
-                    print (i)
                     if not start_done:
                         try:
                             startline = next(gen_start)
