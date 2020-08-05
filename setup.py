@@ -5,7 +5,6 @@ with open("README.md") as fh:
     long_description = fh.read()
 
 packages=setuptools.find_packages()
-breakpoint()
 print ("Found packages:\n",'\n'.join(packages),end='\n\n')
 setuptools.setup(
     name="eprof",
