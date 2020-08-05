@@ -1,0 +1,23 @@
+#!/usr/bin/python3
+import eprof.bin.parser as parser
+from eprof.file import Event_file
+from kvhf.file import KVH_file
+
+
+args= parser.getArgs()
+
+paths= args["paths"]
+sep_key = args["sep_key"] 
+sep_val=args["sep_val"]
+out_path=args['out_path'][0]
+KVH_file.default_key_sep = sep_key
+KVH_file.default_value_sep =sep_val 
+
+
+
+the_file= KVH_file()
+for path in paths:
+    f= Event_file(path)
+    kvh= f.to_kvh_file()
+    the_file.merge_vertical(kvh)
+the_file.dump(out_path)
