@@ -1,14 +1,13 @@
-# Eprofiler 0.0
-Block profiler.
+# Eprofiler
 
-# Function and motivation
+## Function and motivation
 
 Eprofiler is a tool designed to easely and precisely time bloc of code rather than a function of a line. This is also done to work across many process. It's composed a small C library  providing a really basic interface that product primitives outputs. This outputs are processed by eprof executable to produce kvhf files(https://github.com/crazyhouse33/kvhf). 
 
 This design allow for the lib code to be the most simple, precise and efficient as possible. This also reduce greatly the effort to support another language. If you develop a library in another language you can reuse eprof executable and the generic library tests suits. Once integrated, this will also output metrics about the precision of your implementation.
 
 
-# Install
+## Install
 
 ```bash
 # eprof executable
@@ -22,7 +21,7 @@ cmake ..
 cmake --build . --target install
 ```
 
-# Usage
+## Usage
 Once installed link your code, wich would look like:
 
 ```C
