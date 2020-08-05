@@ -68,7 +68,12 @@ changeLogMessage= header+ args.message
 change_dir(root_dir+'/dev')
 threatCommand("./distribute.bash")
 
+
+
+
 #Commit in master
+
+change_dir(root_dir)
 threatCommand("git checkout master")
 
 threatCommand("git checkout {} -- eprof tests setup.py libs .gitignore LICENSE README.md".format(current_branch))

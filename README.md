@@ -11,7 +11,7 @@ This design allow for the lib code to be the most simple, precise and efficient 
 
 ```bash
 # eprof executable
-pip install eprof 
+pip install --index-url https://test.pypi.org/simple/ eprof
 
 # Building and installing C library 
 git clone url
