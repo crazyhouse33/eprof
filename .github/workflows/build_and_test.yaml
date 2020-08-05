@@ -1,0 +1,31 @@
+name: Install and Test
+
+on: [push, pull_request]
+
+jobs:
+  build_and_test:
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest ]
+      fail-fast: true
+    
+    steps:
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v2
+      with:
+        # Semantic version range syntax or exact version of a Python version
+        python-version: '3.x'
+    
+    - name: install exe
+      run: python3 -m pip install -v eprof --extra-index-url https://test.pypi.org/simple/ 
+
+      # need to get the code after, otherwise pip is confused 
+    - uses: actions/checkout@v2
+    - name: install C lib
+      run: cd libs/C/build && cmake .. && cmake --build . --target install
+    
+    - name: test
+      run: cd tests && ./run_tests.bash
+

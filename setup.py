@@ -14,7 +14,7 @@ setuptools.setup(
     long_description_content_type='text/markdown',
     long_description=long_description,
     description="Python package to manipulate eprof lib output",
-    url="https://github.com/crazyhouse33/kvhf.git",
+    url="https://github.com/crazyhouse33/eprof.git",
     packages=packages,
     classifiers=[
         "Programming Language :: Python :: 3",
