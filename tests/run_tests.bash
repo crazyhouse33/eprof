@@ -1,2 +1,2 @@
 #!/bin/bash
-bash -c 'cd ..; python3.7 -m pytest'
+bash -c 'cd ..; python3 -m pytest'

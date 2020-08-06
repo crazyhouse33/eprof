@@ -1,24 +1,33 @@
 import sys
 from generic_output_check import check
 import os
-import pytest 
+import pytest
 
 
 def generate_lib_prods(it):
 
-    #C lib
+    # C lib
 
-    assert os.WEXITSTATUS( os.system("cmake -DPRODUCT_NUM_IT={} ../C/build".format(it))) ==0
+    # Cmake is stupid and dont offer possibility to test out of build
+    current = os.getcwd()
+    os.chdir('../C/build')
 
-    assert os.WEXITSTATUS( os.system("cmake --build ../C/build --target product")) ==0
-    assert os.WEXITSTATUS( os.system("cmake --build ../C/build --target test")) ==0
+    assert os.WEXITSTATUS(
+        os.system(
+            "cmake -DPRODUCT_NUM_IT={} -DCMAKE_BUILD_TYPE=Debug ..".format(it))) == 0
+
+    assert os.WEXITSTATUS(os.system("cmake --build . --target product")) == 0
+    # Cmake is stupid and output on failure dont work alone
+    assert os.WEXITSTATUS(
+        os.system("ctest --verbose --output-on-failure")) == 0
+    os.chdir(current)
+
 
 def test_all_libs():
     abspath = os.path.abspath(__file__)
     dname = os.path.dirname(abspath)
     os.chdir(dname)
 
-    for it in [ 100000, 1000, 100]: # we finish by small for other tests
+    for it in [100000, 1000, 100]:  #  we finish by small for other tests
         generate_lib_prods(it)
         check('C', it)
-
