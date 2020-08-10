@@ -11,10 +11,17 @@ message("Test discovery and building:\n")
 #include_subdirectories(${CMAKE_PROJECT_SOURCE_DIR}/extern/test/src)
 #file(GLOB_RECURSE TESTS_EXT_SRC CONFIGURE_DEPENDS ${CMAKE_PROJECT_SOURCE_DIR}/extern/test/src/*.c ${CMAKE_PROJECT_SOURCE_DIR}/extern/test/src/*.h)
 file(GLOB_RECURSE TESTS ${CMAKE_CURRENT_SOURCE_DIR}/*.c)
-list(FILTER TESTS EXCLUDE REGEX ${CMAKE_CURRENT_SOURCE_DIR}/ext-tests/.c*) # every .c in test excecpt the one in ext-test is to be compiled as a test
+file(GLOB_RECURSE MUNIT_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/extern/munit/*.c ${CMAKE_CURRENT_SOURCE_DIR}/extern/munit/*.h)
+list (REMOVE_ITEM TESTS ${MUNIT_SOURCES})
+list (REMOVE_ITEM MUNIT_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/extern/munit/example.c)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/extern/munit)
+
+
+
+
 foreach(file ${TESTS})
   get_filename_component (name_without_extension ${file} NAME_WE)
-  add_executable(${name_without_extension} ${file})
+  add_executable(${name_without_extension} ${file} ${MUNIT_SOURCES})
   target_link_libraries(${name_without_extension} eprof)
   add_test(NAME ${name_without_extension} COMMAND ${name_without_extension} ${PRODUCT_NUM_IT} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/out)
   message("\t-Found ${file}. Will be build as ${EXECUTABLE_OUTPUT_PATH}/${name_without_extension}")
