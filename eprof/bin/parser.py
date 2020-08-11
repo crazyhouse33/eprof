@@ -13,7 +13,7 @@ parser.add_argument('--sep-key', type=str,default=':',
 parser.add_argument('--sep-val', type=str,default=',',
                     help='Character separating the values of the kvhf output')
 
-parser.add_argument('-o', '--out-path', nargs=1,
+parser.add_argument('-o', '--out-path', required=True,
                     help='Path of the created kvhf file.')
 
 
