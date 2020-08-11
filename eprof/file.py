@@ -35,22 +35,28 @@ class Event_file:
 
     def parse_dir(self,dir_path):
         global i
-        with open(dir_path+"/S") as f_start: 
-            with open(dir_path+"/E") as f_end:
+        path_start=dir_path+"/S"
+        path_end=dir_path+"/E"
+        with open(path_start) as f_start: 
+            with open(path_end) as f_end:
                 gen_start=read_file_until(f_start, self.time_end_sep)
                 gen_end=read_file_until(f_end, self.time_end_sep)
                 start_done= False
                 end_done=False
+                l_e=0
+                l_s=0
+                
 
                 #we interlude start and end to minimize memory footprint
                 while not start_done or not end_done:
                     if not start_done:
                         try:
                             startline = next(gen_start)
+                            l_s+=1
                         except StopIteration:
                             start_done=True
                             continue
-                        ev_starts, time_start= self.parse_line(startline)
+                        ev_starts, time_start= self.parse_line(startline, path_start, l_s)
                         for start in ev_starts:
                             entry= self.dictionnary_events[start]
                             entry.add_event_start(time_start)
@@ -58,17 +64,21 @@ class Event_file:
                     if not end_done:
                         try: 
                             endline = next(gen_end) 
+                            l_e+=1
                         except StopIteration:
                             end_done=True
                             continue
-                        ev_ends, time_end= self.parse_line(endline)
+                        ev_ends, time_end= self.parse_line(endline, path_end, l_e)
                         for end in ev_ends:
                             entry= self.dictionnary_events[end]
                             entry.add_event_end(time_end)
 
-    def parse_line(self, line):
-        partition= line.partition(self.time_begin_sep)
-        return [name.strip() for name in partition[0].split(self.event_sep)], float(partition[2])
+    def parse_line(self, line, path="", lineno=-1):
+        try:
+            partition= line.partition(self.time_begin_sep)
+            return [name.strip() for name in partition[0].split(self.event_sep)], float(partition[2])
+        except Exception as e:
+            raise ValueError("Parsing error on file \"{}\":{}".format(path,lineno)) from e
 
     def to_kvh_file(self):
         kvhf_dic={}
