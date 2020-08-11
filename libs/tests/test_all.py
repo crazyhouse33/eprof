@@ -19,6 +19,7 @@ def additional_tests():
         os.system("ctest --verbose --output-on-failure")) == 0
     os.chdir(current)
 
+
 def generate_lib_prods(it):
 
     # C lib

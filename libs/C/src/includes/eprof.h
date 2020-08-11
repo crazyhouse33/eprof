@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#define QUOTE_RES_(...) #__VA_ARGS__
-#define QUOTE_RES(...) QUOTE_RES_(__VA_ARGS__)
+#define EPROF_QUOTE_RES_(...) #__VA_ARGS__
+#define EPROF_QUOTE_RES(...) EPROF_QUOTE_RES_(__VA_ARGS__)
 
 typedef struct Eprof Eprof;
 struct Eprof{
@@ -13,19 +13,19 @@ struct Eprof{
 };
 
 #define eprof_event_end(profiler, ...) \
-__eprof_print_and_time(profiler->end_file, QUOTE_RES(__VA_ARGS__))
+__eprof_print_and_time(profiler->end_file, EPROF_QUOTE_RES(__VA_ARGS__))
 /*Mark all the given events end. Log time with internal timer*/
 
 #define eprof_event_start(profiler, ...) \
-__eprof_print_and_time(profiler->start_file, QUOTE_RES(__VA_ARGS__))
+__eprof_print_and_time(profiler->start_file, EPROF_QUOTE_RES(__VA_ARGS__))
 /*Mark all the given events start. Log time with internal timer*/
 
 #define eprof_event_end_nt(profiler, time, ...) \
-__eprof_log(profiler->end_file, QUOTE_RES(__VA_ARGS__), time)
+__eprof_log(profiler->end_file, EPROF_QUOTE_RES(__VA_ARGS__), time)
 /*Mark all the given events end. Log given time unstead of using the timer*/
 
 #define eprof_event_start_nt(profiler, time, ...) \
-__eprof_log(profiler->start_file, QUOTE_RES(__VA_ARGS__), time)
+__eprof_log(profiler->start_file, EPROF_QUOTE_RES(__VA_ARGS__), time)
 /*Mark all the given events start. Log given time unstead of using the timer*/
 
 // fof tests

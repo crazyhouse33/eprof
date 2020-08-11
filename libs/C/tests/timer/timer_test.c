@@ -5,7 +5,7 @@
 #include <string.h>
 int main() {
 
-    long res = init_timer();
+  long res = init_timer();
 
   for (int i = 0; i < 10; i++) {
 
@@ -20,7 +20,6 @@ int main() {
       exit(1);
     }
 
-
     char *placeholder;
     fread(out, sizeof(char), 1035, fp);
     char *space = strchr(out, ' ');
@@ -30,7 +29,6 @@ int main() {
     int ret_status = pclose(fp);
     long end = get_time_ns();
 
-    
     munit_assert_ulong(start_proc, >=, start);
     munit_assert_ulong(start_proc, <=, end);
     munit_assert_ulong(end_proc, <=, end);
