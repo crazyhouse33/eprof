@@ -31,15 +31,19 @@ Eprof *new_eprofiler(char *file_path, bool append) {
     remove(end_file);
   }
   mkdir(file_path, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-  FILE *f_start = fopen(start_file, "a");
+  FILE *f_start = open_and_lock(start_file, "a");
   if (!f_start) {
     perror("Can not create start file: ");
     exit(3);
   }
-  FILE *f_end = fopen(end_file, "a");
+  FILE *f_end = open_and_lock(end_file, "a");
   if (!f_end) {
     perror("Can not create end file: ");
     exit(3);
+  }
+  if (append){
+	  char* buffer = malloc(sizeof(char)*);
+  	setvbuf( f_start, NULL, _IOFBF, sizeof( buf ) )
   }
   prof->start_file = f_start;
   prof->end_file = f_end;
@@ -52,4 +56,8 @@ unsigned long __eprof_print_and_time(FILE *file, char *string) {
   unsigned long time_res = get_time_ns();
   __eprof_log(file, string, time_res);
   return time_res;
+}
+
+void eprof_free(){
+	
 }
