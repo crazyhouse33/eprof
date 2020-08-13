@@ -224,3 +224,11 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+libs/C/tests/out/2
+libs/C/tests/out/lock_test
+libs/C/tests/out/lock_test2
+
+libs/C/tests/out/eprof_test/E
+libs/C/tests/out/eprof_test/S
+tests/out/kvh_test.kvhf
