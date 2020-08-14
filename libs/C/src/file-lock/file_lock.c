@@ -4,7 +4,6 @@
 #include <sys/file.h>
 #include <stdlib.h>
 #include <string.h>
-#include <libexplain/flock.h>
 extern int errno;
 
 int fopen_mode_to_open(char* mode){
@@ -96,8 +95,6 @@ FILE* open_and_lock(char* file, char* mode){
 
 	
 	if (status ==-1){
-		char* a=explain_flock(fd, LOCK_NB | LOCK_EX);
-		printf(a);
 		return (FILE*) -1;
 	}
 	return fopen(file, mode);

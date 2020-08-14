@@ -17,7 +17,7 @@ pip install --index-url https://test.pypi.org/simple/ eprof
 git clone url
 cd libs/C/build
 cmake .. 
-# Add -DCMAKE_INSTALL_PREFIX:PATH=/path/to/install to the last command to install in another directory than your default lib location
+# Add -DCMAKE_INSTALL_PREFIX:PATH=/path/to/install to the last command to install in another directory than your default lib location (need root)
 cmake --build . --target install
 ```
 
