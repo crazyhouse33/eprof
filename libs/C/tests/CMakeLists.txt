@@ -38,3 +38,4 @@ endforeach()
 
 #listing dependencies of test (we should have done it automatically in the name)
 
+add_dependencies (timer_test timer_precision)# timer call timer prcision
