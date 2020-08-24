@@ -2,8 +2,12 @@
 #include "timer.h"
 #include "munit.h"
 #include "stdio.h"
-// TODO check exist
+
+// need to handle valgrind cause it mess up precision tests
+
+#ifdef VALGRIND
 #include "valgrind/valgrind.h"
+#endif
 
 // popen
 #ifdef _Win32
@@ -46,9 +50,11 @@ int main() {
   // we print in order for an extern test to test that cross process timing is working as well
   printf("%lu %lu", t1, t2);
   unsigned long time = t2 - t1;
-  // testing precision
+// testing precision
+#ifdef VALGRIND
   if (RUNNING_ON_VALGRIND)
     return 0;
+#endif
   munit_assert_ulong(time, >=, TIME_TO_SLEEP_MS * NANOS_PER_SEC / 1000);
   munit_assert_ulong(time, <=, (TIME_TO_SLEEP_MS + ALLOWED_MISPRESION) * NANOS_PER_SEC / 1000);
   return 0;

@@ -1,4 +1,10 @@
 #putting test in bin/test
+#detecting valgrind
+include(CheckIncludeFile)
+check_include_file("valgrind/valgrind.h" HAVE_VALGRIND)
+if(NOT HAVE_VALGRIND)
+	add_definitions(-D NO_VALGRIND=1)
+endif()
 
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
@@ -39,3 +45,5 @@ endforeach()
 #listing dependencies of test (we should have done it automatically in the name)
 
 add_dependencies (timer_test timer_precision)# timer call timer prcision
+
+

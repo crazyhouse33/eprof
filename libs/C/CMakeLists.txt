@@ -15,7 +15,7 @@ set (version 0.0)
 project(eproflibc C)
 
 include (CTest)
-set(CMAKE_C_FLAGS_DEBUG "-ggdb3 -lexplain -fdiagnostics-color=always")
+set(CMAKE_C_FLAGS_DEBUG "-ggdb3 -fdiagnostics-color=always")
 
 # Building main executable
 add_subdirectory(src)
