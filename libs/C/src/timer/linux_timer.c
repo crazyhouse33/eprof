@@ -8,6 +8,8 @@
 #define CLOCKID CLOCK_REALTIME
 #endif
 
+//TODO test to preallocate statically the structure and see if it work faster or with more precision
+
 unsigned long get_time_ns() {
 
   long now;

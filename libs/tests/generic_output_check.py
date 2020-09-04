@@ -6,6 +6,8 @@ from eprof.file import Event_file
 from kvhf.file import KVH_file
 from kvhf.history_entry import Serie_stats
 
+out_format='../{}/tests/out/perf/{}.kvhf'
+
 
 def check(library, it, numproc=1):
 
@@ -24,7 +26,7 @@ def check(library, it, numproc=1):
 
     if numproc==1:#We do perf report for single prcosess only
         it=10*it
-        output_dir='../{}/tests/out/{}.kvhf'.format(library, it)
+        output_dir=out_format.format(library, it)
 
         # Printing precision report
         ev_file_kvhf= ev_file.to_kvh_file()

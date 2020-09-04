@@ -127,3 +127,6 @@ class Event_file:
             kvhf_entry = event.to_kvhf()
             kvhf_dic[key] = kvhf_entry
         return KVH_file(kvhf_dic)
+
+    def add_event(self,name,duration):
+        self.dictionnary_events[name].event.add_occurence(duration)

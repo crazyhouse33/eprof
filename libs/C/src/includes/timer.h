@@ -1,5 +1,6 @@
 
 /*Cross platform high resolution timer*/
+//TODO Include get_intervall giving duration in between get_time_unspecified, for better precision (lesser boiler plate conversion during the timing)
 
 #define NANOS_PER_SEC 1000000000UL
 unsigned long get_time_ns();

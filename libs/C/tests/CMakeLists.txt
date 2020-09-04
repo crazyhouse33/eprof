@@ -2,8 +2,8 @@
 #detecting valgrind
 include(CheckIncludeFile)
 check_include_file("valgrind/valgrind.h" HAVE_VALGRIND)
-if(NOT HAVE_VALGRIND)
-	add_definitions(-D NO_VALGRIND=1)
+if(HAVE_VALGRIND)
+	add_definitions(-D VALGRIND=1)
 endif()
 
 

@@ -1,5 +1,5 @@
 import sys
-from generic_output_check import check
+from generic_output_check import check, out_format
 import os
 import pytest
 import subprocess
@@ -7,7 +7,7 @@ import subprocess
 
 #the tests are really messy and coupled cause of me trying to using cmake for no reasons. TODO just run product and stop reconfiguring for no reason
 
-def additional_tests():
+def additional_C_tests():
     # Run Timer of C libs tests
     current = os.getcwd()
     os.chdir('../C/build')
@@ -70,4 +70,18 @@ def test_all_libs():
     generate_multi_proc_prods(num_proc,it)
     check('C',it, num_proc)
 
-    additional_tests()
+    additional_C_tests()
+
+    get_C_timer_precision()
+
+def get_C_timer_precision():
+    from eprof.file import Event_file
+    
+
+
+    eprof= Event_file()
+    for i in range (1000):
+        output= subprocess.check_output("../C/build/bin/get_smallest_timer", shell=True).decode()
+        eprof.add_event('Minimal Duration', int(output))
+    kvhf= eprof.to_kvh_file()
+    kvhf.dump(out_format.format('C','Minimal_Duration'))

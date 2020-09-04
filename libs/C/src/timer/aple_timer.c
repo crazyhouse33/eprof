@@ -15,6 +15,6 @@ unsigned long get_time_ns() {
 /*This must be wrong*/
 unsigned long init_timer() {
   mach_timebase_info(&info);
-  return  info.numer / info.denom;
+  return info.numer / info.denom;
 }
 #endif
