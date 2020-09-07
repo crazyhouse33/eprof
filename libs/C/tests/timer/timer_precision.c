@@ -43,6 +43,7 @@ static void sleep_ms(int milliseconds) // cross-platform sleep function
 
 #define ALLOWED_MISPRESION 3
 int main() {
+  init_timer();
   unsigned long t1 = get_time_ns();
   sleep_ms(TIME_TO_SLEEP_MS);
   unsigned long t2 = get_time_ns();

@@ -1,34 +1,34 @@
 #include "eprof.h"
+#include "file_lock.h"
 #include "stdlib.h"
 #include "timer.h"
-#include "file_lock.h"
+#include <dirent.h>
 #include <string.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <dirent.h>
 
 #ifdef WIN32
 #include <windows.h>
 #define mkdir(dir, mode) _mkdir(dir)
 #endif
 
-bool rm_all_files(char* dir_name){
-/*Delete all files of a directory at depth one*/
-    struct dirent* cursor; 
-    DIR* dir = opendir(dir_name);
-    char to_remove[1000];
-    if (dir == NULL)
-	return false;
+bool rm_all_files(char *dir_name) {
+  /*Delete all files of a directory at depth one*/
+  struct dirent *cursor;
+  DIR *dir = opendir(dir_name);
+  char to_remove[1000];
+  if (dir == NULL)
+    return false;
 
-	while (cursor = readdir(dir)){ /* On lit le premier répertoire du dossier. */
+  while (cursor = readdir(dir)) { /* On lit le premier répertoire du dossier. */
 
-		snprintf(to_remove, 1000,"%s/%s", dir_name, cursor->d_name);
-		int status=remove(to_remove);
-	}
+    snprintf(to_remove, 1000, "%s/%s", dir_name, cursor->d_name);
+    int status = remove(to_remove);
+  }
 
-    closedir(dir); 
+  closedir(dir);
 
-    return true;
+  return true;
 }
 
 // Used by tests and thus not static
@@ -47,9 +47,10 @@ Eprof *new_eprofiler(char *file_path, bool append) {
   size_t len = strlen(file_path);
   char *start_file = __eprof_get_file_loc(file_path, len, 'S');
   char *end_file = __eprof_get_file_loc(file_path, len, 'E');
+  init_timer();
 
   if (!append) {
-	  rm_all_files(file_path);
+    rm_all_files(file_path);
   }
   mkdir(file_path, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
   FILE *f_start = open_and_lock_fall_back(start_file, "a");
@@ -62,9 +63,10 @@ Eprof *new_eprofiler(char *file_path, bool append) {
     perror("Can not create end file: ");
     exit(3);
   }
-  
+
   prof->start_file = f_start;
   prof->end_file = f_end;
+
   return prof;
 }
 
@@ -76,6 +78,4 @@ unsigned long __eprof_print_and_time(FILE *file, char *string) {
   return time_res;
 }
 
-void eprof_free(){
-	
-}
+void eprof_free() {}

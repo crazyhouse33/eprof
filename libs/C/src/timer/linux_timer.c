@@ -8,11 +8,11 @@
 #define CLOCKID CLOCK_REALTIME
 #endif
 
-//TODO test to preallocate statically the structure and see if it work faster or with more precision
+// TODO test to preallocate statically the structure and see if it work faster or with more precision
 
 unsigned long get_time_ns() {
 
-  long now;
+  unsigned long now;
   struct timespec spec;
   clock_gettime(CLOCKID, &spec);
   now = spec.tv_sec * NANOS_PER_SEC + spec.tv_nsec;
