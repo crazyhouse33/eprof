@@ -10,7 +10,7 @@ if ( ${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR} )
 endif()
 
 
-set(SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/eprof.c ${CMAKE_CURRENT_SOURCE_DIR}/includes/eprof.h ${CMAKE_CURRENT_SOURCE_DIR}/timer/aple_timer.c ${CMAKE_CURRENT_SOURCE_DIR}/timer/linux_timer.c ${CMAKE_CURRENT_SOURCE_DIR}/timer/windows_timer.c ${CMAKE_CURRENT_SOURCE_DIR}/includes/timer.h  ${CMAKE_CURRENT_SOURCE_DIR}/includes/file_lock.h ${CMAKE_CURRENT_SOURCE_DIR}/file-lock/file_lock.c )
+set(SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/eprof.c ${CMAKE_CURRENT_SOURCE_DIR}/includes/eprof.h ${CMAKE_CURRENT_SOURCE_DIR}/timer/aple_timer.c ${CMAKE_CURRENT_SOURCE_DIR}/timer/linux_timer.c ${CMAKE_CURRENT_SOURCE_DIR}/timer/windows_timer.c ${CMAKE_CURRENT_SOURCE_DIR}/timer/timer.c ${CMAKE_CURRENT_SOURCE_DIR}/includes/timer.h  ${CMAKE_CURRENT_SOURCE_DIR}/includes/file_lock.h ${CMAKE_CURRENT_SOURCE_DIR}/file-lock/file_lock.c )
 
 set(ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 

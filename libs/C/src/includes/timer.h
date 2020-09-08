@@ -10,6 +10,11 @@ unsigned long get_time_ns();
 unsigned long get_time_unspecified();
 /*Return time since get_time_unspecified starting point in unspecified unit. */
 
+unsigned long _init_timer();
+/*The low level platform dependant to init*/
+
 unsigned long init_timer();
-/*Set the timer and return resolution*/
+/*Set the timer, do a first mesurement to trash first result and return resolution*/
+
+
 

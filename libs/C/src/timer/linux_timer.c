@@ -21,8 +21,7 @@ unsigned long get_time_ns() {
 
 unsigned long get_time_unspecified() { return get_time_ns(); }
 
-unsigned long init_timer() {
-
+unsigned long _init_timer() {
   struct timespec linux_time;
   clock_getres(CLOCKID, &linux_time);
   return linux_time.tv_sec * NANOS_PER_SEC + linux_time.tv_nsec;

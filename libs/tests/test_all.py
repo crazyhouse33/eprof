@@ -2,6 +2,7 @@ import shlex
 import sys
 from generic_output_check import check, out_format
 import os
+import platform
 import pytest
 import subprocess
 
@@ -90,8 +91,11 @@ def get_C_timer_precision():
     eprof = Event_file()
     for i in range(1000):
         output = subprocess.check_output(
-            "../C/build/bin/get_smallest_timer",
+            "../C/build/bin/timer_precision",
             shell=True).decode()
-        eprof.add_event('Minimal Duration', int(output))
+        split = output.partition(' ')
+        time = int(split[2]) - int(split[0])
+
+        eprof.add_event('{} Minimal Duration'.format(platform.system()), time)
     kvhf = eprof.to_kvh_file()
     kvhf.dump(out_format.format('C', 'Minimal_Duration'))

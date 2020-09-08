@@ -11,5 +11,5 @@ unsigned long get_time_unspecified() {
 
 unsigned long get_time_ns() { return (1e9 * get_time_unspecified()) / win_frequency.QuadPart; }
 
-unsigned long init_timer() { QueryPerformanceFrequency(win_frequency) return win_frequency.QuadPart; }
+unsigned long _init_timer() { QueryPerformanceFrequency(win_frequency) return win_frequency.QuadPart; }
 #endif
