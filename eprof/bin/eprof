@@ -9,7 +9,7 @@ args= parser.getArgs()
 paths= args["paths"]
 sep_key = args["sep_key"] 
 sep_val=args["sep_val"]
-out_path=args['out_path'][0]
+out_path=args['out_path']
 KVH_file.default_key_sep = sep_key
 KVH_file.default_value_sep =sep_val 
 
