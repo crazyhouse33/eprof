@@ -28,7 +28,7 @@ __eprof_log(profiler->end_file, EPROF_QUOTE_RES(__VA_ARGS__), time)
 __eprof_log(profiler->start_file, EPROF_QUOTE_RES(__VA_ARGS__), time)
 /*Mark all the given events start. Log given time unstead of using the timer*/
 
-// fof tests
+// Exported fo for tests
 char* __eprof_get_file_loc(char* name, size_t len, char letter);
 
 void __eprof_log(FILE* file, char* string, unsigned long time);

@@ -18,8 +18,17 @@ add_library(eprof STATIC ${SOURCES})
 
 set_target_properties(eprof PROPERTIES VERSION ${version})
 target_include_directories(eprof PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/includes)
+set (headers ${SOURCES})
+list(FILTER headers INCLUDE REGEX .*\.h)
+message ("${headers}")
+ 
 
-INSTALL(TARGETS eprof
-	ARCHIVE DESTINATION eprof
+set_target_properties(eprof PROPERTIES PUBLIC_HEADER "${headers}")
+
+
+include(GNUInstallDirs)
+INSTALL(TARGETS eprof PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/eprof"
 )
+ 	
+
 
